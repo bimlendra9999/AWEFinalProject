@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('./front/home');
 });
 
-Route::group(['prefix'=>'back'],function(){
+Route::group(['prefix'=>'back','middleware'=>'auth'],function(){
     Route::get('/',[DashboardController::class,'index']);
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
