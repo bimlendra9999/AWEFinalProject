@@ -5,6 +5,9 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+//Import Model
+use App\Models\Category;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -20,5 +23,6 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        \App\Models\Category::factory(7)->create();
     }
 }

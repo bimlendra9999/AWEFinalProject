@@ -53,10 +53,42 @@
                                 </div>
                                 <a href="contact.html" class="nav-item nav-link">Contact</a>
                             </div>
-                            <div class="navbar-nav ml-auto py-0">
-                                <a href="" class="nav-item nav-link">Login</a>
-                                <a href="" class="nav-item nav-link">Register</a>
-                            </div>
+                            @if(Route::has('login'))
+                                @auth
+                                    @if(Auth::user()->type===1)
+                                    <li class="menu-item menu-item-has-children parent" >
+                                        <a title="My Account" href="#">My Account ({{Auth::user()->name}})<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                        <ul class="submenu curency" >
+                                            <li class="menu-item" >
+                                                <a title="Dashboard" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                                            </li>
+                                            <a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power -off"></i>Logout</a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                @csrf
+                                            </form>
+                                        </ul>
+                                    </li>
+                                    @else
+                                    <li class="menu-item menu-item-has-children parent" >
+                                        <a title="My Account" href="#">My Account ({{Auth::user()->name}})<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                        <ul class="submenu curency" >
+                                            <li class="menu-item" >
+                                                <a title="Dashboard" href="#">Dashboard</a>
+                                            </li>
+                                            <a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power -off"></i>Logout</a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                @csrf
+                                            </form>
+                                        </ul>
+                                    </li>
+                                    @endif
+                                    @else
+                                    <div class="navbar-nav ml-auto py-0">
+                                        <a href="" class="nav-item nav-link">Login</a>
+                                        <a href="" class="nav-item nav-link">Register</a>
+                                    </div>
+                                    @endif
+                            @endif
                         </div>
                     </nav>
                     <div id="header-carousel" class="carousel slide" data-ride="carousel">
